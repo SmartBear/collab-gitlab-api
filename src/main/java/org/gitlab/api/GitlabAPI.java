@@ -1252,22 +1252,22 @@ public class GitlabAPI {
         return retrieve().getAll(tailUrl, GitlabMergeRequest[].class);
     }
 
-    public List<GitlabMergeRequest> getMergeRequests(Serializable projectId) throws IOException {
+    public List<GitlabMergeRequest> getMergeRequests(Serializable projectId) {
         String tailUrl = GitlabProject.URL + "/" + sanitizeProjectId(projectId) + GitlabMergeRequest.URL + PARAM_MAX_ITEMS_PER_PAGE;
         return retrieve().getAll(tailUrl, GitlabMergeRequest[].class);
     }
 
-    public List<GitlabMergeRequest> getMergeRequests(Serializable projectId, Pagination pagination) throws IOException {
+    public List<GitlabMergeRequest> getMergeRequests(Serializable projectId, Pagination pagination) {
         String tailUrl = GitlabProject.URL + "/" + sanitizeProjectId(projectId) + GitlabMergeRequest.URL + pagination.toString();
         return retrieve().getAll(tailUrl, GitlabMergeRequest[].class);
     }
 
-    public List<GitlabMergeRequest> getMergeRequests(GitlabProject project) throws IOException {
+    public List<GitlabMergeRequest> getMergeRequests(GitlabProject project) {
         String tailUrl = GitlabProject.URL + "/" + project.getId() + GitlabMergeRequest.URL + PARAM_MAX_ITEMS_PER_PAGE;
         return retrieve().getAll(tailUrl, GitlabMergeRequest[].class);
     }
 
-    public List<GitlabMergeRequest> getMergeRequests(GitlabProject project, Pagination pagination) throws IOException {
+    public List<GitlabMergeRequest> getMergeRequests(GitlabProject project, Pagination pagination) {
         String tailUrl = GitlabProject.URL + "/" + project.getId() + GitlabMergeRequest.URL + pagination.toString();
         return retrieve().getAll(tailUrl, GitlabMergeRequest[].class);
     }
@@ -1330,6 +1330,11 @@ public class GitlabAPI {
     public GitlabMergeRequest getMergeRequestChanges(Serializable projectId, Integer mergeRequestId) throws IOException {
         String tailUrl = GitlabProject.URL + "/" + sanitizeProjectId(projectId) + GitlabMergeRequest.URL + "/" + mergeRequestId + "/changes";
         return retrieve().to(tailUrl, GitlabMergeRequest.class);
+    }
+
+    public List<GitlabCommit> getMergeRequestCommits(Serializable projectId, Integer mergeRequestId) {
+        String tailUrl = "/projects/" + this.sanitizeProjectId(projectId) + "/merge_requests" + "/" + mergeRequestId + "/commits";
+        return this.retrieve().getAll(tailUrl, GitlabCommit[].class);
     }
     
     public GitlabMergeRequest getMergeRequest(Serializable projectId, Integer mergeRequestId) throws IOException {
