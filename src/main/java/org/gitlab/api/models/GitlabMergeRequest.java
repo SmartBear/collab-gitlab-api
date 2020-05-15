@@ -64,6 +64,9 @@ public class GitlabMergeRequest {
     @JsonProperty("sha")
     private String sha;
 
+    @JsonProperty("has_conflicts")
+    private boolean hasConflicts;
+
     public Integer getId() {
         return id;
     }
@@ -280,5 +283,13 @@ public class GitlabMergeRequest {
 
     public void setSha(String sha) {
         this.sha = sha;
+    }
+
+    public boolean isHasConflicts() {
+        return hasConflicts;
+    }
+
+    public void setHasConflicts(boolean hasConflicts) {
+        this.hasConflicts = hasConflicts;
     }
 }
