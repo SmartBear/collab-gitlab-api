@@ -3067,6 +3067,11 @@ public class GitlabAPI {
         }
     }
 
+    public List<GitlabPipeline> getMergeRequestPipelines(Serializable projectName, Integer mergeRequestId) throws IOException {
+        return retrieve().getAll(GitlabProject.URL + "/" + sanitizeProjectId(projectName) + GitlabMergeRequest.URL + "/"
+                + mergeRequestId + GitlabPipeline.URL + PARAM_MAX_ITEMS_PER_PAGE, GitlabPipeline[].class);
+    }
+
     /**
      * Gets email-on-push service setup for a projectId.
      *
