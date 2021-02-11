@@ -1921,6 +1921,33 @@ public class GitlabAPI {
                 .to(tailUrl, GitlabProjectHook.class);
     }
 
+    public GitlabProjectHook addProjectHook(Serializable projectId,
+                                            String url,
+                                            boolean pushEvents,
+                                            boolean issuesEvents,
+                                            boolean mergeRequestEvents,
+                                            boolean noteEvents,
+                                            boolean tagPushEvents,
+                                            boolean sslVerification,
+                                            boolean jobEvents,
+                                            boolean pipelineEvents,
+                                            String token) throws IOException {
+        String tailUrl = GitlabProject.URL + "/" + sanitizeProjectId(projectId) + GitlabProjectHook.URL;
+
+        return dispatch()
+                .with("url", url)
+                .with("push_events", pushEvents ? "true" : "false")
+                .with("issues_events", issuesEvents ? "true" : "false")
+                .with("merge_requests_events", mergeRequestEvents ? "true" : "false")
+                .with("note_events", noteEvents ? "true" : "false")
+                .with("tag_push_events", tagPushEvents ? "true" : "false")
+                .with("enable_ssl_verification", sslVerification ? "true" : "false")
+                .with("pipeline_events", pipelineEvents ? "true" : "false")
+                .with("job_events", jobEvents ? "true" : "false")
+                .with("token", token)
+                .to(tailUrl, GitlabProjectHook.class);
+    }
+
     public GitlabProjectHook editProjectHook(GitlabProject project, String hookId, String url) throws IOException {
         Query query = new Query()
                 .append("url", url);
@@ -3038,6 +3065,11 @@ public class GitlabAPI {
         } else {
             return retrieve().getAll(GitlabProject.URL + "/" + project.getId() + GitlabTrigger.URL + PARAM_MAX_ITEMS_PER_PAGE, GitlabTrigger[].class);
         }
+    }
+
+    public List<GitlabPipeline> getMergeRequestPipelines(Serializable projectName, Integer mergeRequestId) throws IOException {
+        return retrieve().getAll(GitlabProject.URL + "/" + sanitizeProjectId(projectName) + GitlabMergeRequest.URL + "/"
+                + mergeRequestId + GitlabPipeline.URL + PARAM_MAX_ITEMS_PER_PAGE, GitlabPipeline[].class);
     }
 
     /**
