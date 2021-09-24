@@ -1409,17 +1409,26 @@ public class GitlabAPI {
      * @return new merge request status
      * @throws IOException on gitlab api call error
      */
-    public GitlabMergeRequest acceptMergeRequest(GitlabProject project, Integer mergeRequestId, String mergeCommitMessage) throws IOException {
-        return acceptMergeRequest(project.getId(), mergeRequestId, mergeCommitMessage);
+    public GitlabMergeRequest acceptMergeRequest(GitlabProject project, Integer mergeRequestId, String mergeCommitMessage,
+                                                 String squashCommitMessage, boolean deleteBranch) throws IOException {
+        return acceptMergeRequest(project.getId(), mergeRequestId, mergeCommitMessage, squashCommitMessage, deleteBranch);
     }
     
-    public GitlabMergeRequest acceptMergeRequest(Serializable projectId, Integer mergeRequestId, String mergeCommitMessage) throws IOException {
+    public GitlabMergeRequest acceptMergeRequest(Serializable projectId, Integer mergeRequestId, String mergeCommitMessage,
+                                                 String squashCommitMessage, boolean deleteBranch) throws IOException {
+
         String tailUrl = GitlabProject.URL + "/" + sanitizeProjectId(projectId) + GitlabMergeRequest.URL + "/" + mergeRequestId + "/merge";
         GitlabHTTPRequestor requestor = retrieve().method("PUT");
         requestor.with("id", projectId);
         requestor.with("merge_request_id", mergeRequestId);
-        if (mergeCommitMessage != null)
+        if (mergeCommitMessage != null) {
             requestor.with("merge_commit_message", mergeCommitMessage);
+        }
+        if (squashCommitMessage != null) {
+            requestor.with("squash", true);
+            requestor.with("squash_commit_message", squashCommitMessage);
+        }
+        requestor.with("should_remove_source_branch", deleteBranch);
         return requestor.to(tailUrl, GitlabMergeRequest.class);
     }
 

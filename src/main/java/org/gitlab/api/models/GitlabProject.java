@@ -36,6 +36,12 @@ public class GitlabProject {
     @JsonProperty("merge_requests_enabled")
     private Boolean mergeRequestsEnabled;
 
+    @JsonProperty("merge_method")
+    private String mergeMethod;
+
+    @JsonProperty("squash_option")
+    private String squashOption;
+
     @JsonProperty("snippets_enabled")
     private Boolean snippetsEnabled;
 
@@ -470,6 +476,22 @@ public class GitlabProject {
 
     public void setPrintingMergeRequestLinkEnabled(Boolean printingMergeRequestLinkEnabled) {
         this.printingMergeRequestLinkEnabled = printingMergeRequestLinkEnabled;
+    }
+
+    public String getMergeMethod() {
+        return mergeMethod;
+    }
+
+    public void setMergeMethod(String mergeMethod) {
+        this.mergeMethod = mergeMethod;
+    }
+
+    public String getSquashOption() {
+        return squashOption;
+    }
+
+    public void setSquashOption(String squashOption) {
+        this.squashOption = squashOption;
     }
 
     @Override
