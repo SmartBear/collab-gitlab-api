@@ -67,6 +67,12 @@ public class GitlabMergeRequest {
     @JsonProperty("has_conflicts")
     private boolean hasConflicts;
 
+    @JsonProperty
+    private boolean squash;
+
+    @JsonProperty("force_remove_source_branch")
+    private boolean forceRemoveSourceBranch;
+
     public Integer getId() {
         return id;
     }
@@ -291,5 +297,21 @@ public class GitlabMergeRequest {
 
     public void setHasConflicts(boolean hasConflicts) {
         this.hasConflicts = hasConflicts;
+    }
+
+    public boolean isSquash() {
+        return squash;
+    }
+
+    public void setSquash(boolean squash) {
+        this.squash = squash;
+    }
+
+    public boolean isForceRemoveSourceBranch() {
+        return forceRemoveSourceBranch;
+    }
+
+    public void setForceRemoveSourceBranch(boolean forceRemoveSourceBranch) {
+        this.forceRemoveSourceBranch = forceRemoveSourceBranch;
     }
 }
