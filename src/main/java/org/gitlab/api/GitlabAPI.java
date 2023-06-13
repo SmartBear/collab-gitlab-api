@@ -2439,6 +2439,15 @@ public class GitlabAPI {
         return Arrays.asList(retrieve().to(tailUrl, GitlabProjectMember[].class));
     }
 
+    public List<GitlabProjectMember> getProjectMembersAll(Serializable projectId) throws IOException {
+        return getProjectMembersAll(projectId, new Pagination());
+    }
+
+    public List<GitlabProjectMember> getProjectMembersAll(Serializable projectId, Pagination pagination) throws IOException {
+        String tailUrl = GitlabProject.URL + "/" + sanitizeProjectId(projectId) + GitlabProjectMember.URL + "/all" + pagination.asQuery();
+        return Arrays.asList(retrieve().to(tailUrl, GitlabProjectMember[].class));
+    }
+
     /**
      * This will fail, if the given namespace is a user and not a group
      *
