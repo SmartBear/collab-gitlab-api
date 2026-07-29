@@ -4,7 +4,7 @@
 
 	<groupId>org.gitlab</groupId>
 	<artifactId>java-gitlab-api</artifactId>
-	<version>4.0.1.smartbear.8.3</version>
+	<version>4.0.1.smartbear.8.4</version>
 
 	<name>Gitlab Java API Wrapper</name>
 	<description>A Java wrapper for the Gitlab Git Hosting Server API</description>
@@ -73,12 +73,12 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.15.2</version>
+			<version>2.18.9</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.15.2</version>
+			<version>2.18.9</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -123,7 +123,9 @@
 						</goals>
 						<configuration>
 							<systemPropertyVariables>
+								<!--suppress UnresolvedMavenProperty -->
 								<docker.host.address>${docker.host.address}</docker.host.address>
+								<!--suppress UnresolvedMavenProperty -->
 								<gitlab.port>${gitlab.port}</gitlab.port>
 							</systemPropertyVariables>
 						</configuration>
@@ -200,6 +202,7 @@
 										</volumes>
 										<wait>
 											<http>
+												<!--suppress UnresolvedMavenProperty -->
 												<url>http://${docker.host.address}:${gitlab.port}/api/v4/version</url>
 												<method>GET</method>
 												<status>401</status>
