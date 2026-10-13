@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * [
  * {
- * "token": "7dfb8f45432193abcd54123456090f",
+ * "token": "TRIGGER_TOKEN",
  * "created_at": "2016-07-08T12:33:25.151Z",
  * "updated_at": "2016-07-08T12:33:25.151Z",
  * "deleted_at": null,
